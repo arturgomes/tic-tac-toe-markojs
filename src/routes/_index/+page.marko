@@ -1,29 +1,65 @@
-<div.container>
-  <header>
-    <img.logo src="./logo.svg" alt="Marko"/>
-  </header>
-  <main>
-    <p>Edit <code>./src/routes/_index/+page.marko</code> and save to reload.</p>
-    <a href="https://markojs.com/docs/getting-started">
-      Learn Marko
-    </a>
-  </main>
-</div>
-<mouse-mask/>
-
-style {
-  .container {
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: clamp(1em, 2vw, 2em); 
-    padding: 1em;
-    box-sizing: border-box;
-    height:100%;
-    width:100%;
-  }
-  img.logo {
-    width:12em;
-  }
-}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Tic-Tac-Toe with Marko.js</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Centers vertically */
+        align-items: center; /* Centers horizontally */
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      .status {
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+      .board {
+        display: grid;
+        grid-template-columns: repeat(3, 100px);
+        grid-gap: 5px;
+        margin: 0 auto;
+      }
+      .cell {
+        width: 100px;
+        height: 100px;
+        background-color: #eee;
+        font-size: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .cell:hover {
+        background-color: #ddd;
+      }
+      .x-symbol {
+        color: red;
+      }
+      .o-symbol {
+        color: blue;
+      }
+      .reset {
+        margin-top: 16px;
+        border: 1px solid #999;
+        padding: 8px 16px;
+        border-radius: 16px;
+      }
+      .reset:hover {
+        background-color: #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <game-board/>
+    </div>
+  </body>
+</html>

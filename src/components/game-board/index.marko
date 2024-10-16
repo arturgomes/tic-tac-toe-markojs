@@ -1,0 +1,69 @@
+class {
+  onCreate() {
+    this.state = {
+      cells: Array(9).fill(null),
+      xIsNext: true,
+    };
+  }
+  handleClick(index) {
+    const cells = [...this.state.cells];
+    if (cells[index] || this.calculateWinner(cells)) return;
+    cells[index] = this.state.xIsNext ? "X" : "O";
+    this.state.cells = cells;
+    this.state.xIsNext = !this.state.xIsNext;
+  }
+  calculateWinner(cells) {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8], // Rows
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8], // Columns
+      [0, 4, 8],
+      [2, 4, 6], // Diagonals
+    ];
+    for (const [a, b, c] of lines) {
+      if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
+        return cells[a];
+      }
+    }
+    return null;
+  }
+  resetGame() {
+    this.state = {
+      cells: Array(9).fill(null),
+      xIsNext: true,
+    };
+  }
+}
+$ const winner = component.calculateWinner(state.cells);
+<div class="status">
+  <if(!winner && state.cells.includes(null))>
+    Next player:
+    <span class=(state.xIsNext ? "x-symbol" : "o-symbol")>
+      ${state.xIsNext ? "X" : "O"}
+    </span>
+  </if>
+  <else-if(winner)>
+    Winner:
+    <span class=(winner === "X" ? "x-symbol" : "o-symbol")>
+      ${winner}
+    </span>
+  </else-if>
+  <else>It's a draw!</else>
+</div>
+<div class="board">
+  <for|cell, index| of=state.cells>
+    <div class="cell" onClick("handleClick", index)>
+      <if(cell)>
+        <span class=(cell === "X" ? "x-symbol" : "o-symbol")>
+          ${cell}
+        </span>
+      </if>
+    </div>
+  </for>
+</div>
+<button class="reset" onClick("resetGame")>
+  Restart Game
+</button>
